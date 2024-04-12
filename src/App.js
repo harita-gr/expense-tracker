@@ -3,7 +3,17 @@ import Balance from "./components/Balance";
 import Transactions from "./components/Transactions";
 import NewTransaction from "./components/NewTransaction";
 import ExpenseSheet from "./components/ExpenseSheet";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, styled } from "@mui/material";
+
+const StyledBox = styled(Box)({
+  background: "#fff",
+  padding: 10,
+  borderRadius: 20,
+  width: 500,
+  "& > *": {
+    padding: 10,
+  },
+});
 
 function App() {
   const [transactions, setTransactions] = useState([
@@ -14,7 +24,7 @@ function App() {
   ]);
 
   const addTransactions = (transaction) => {
-    setTransactions((transactions) => [transactions, ...transaction]);
+    setTransactions((transactions) => [transaction, ...transactions]);
   };
 
   const deleteTransactions = (id) => {
@@ -25,8 +35,10 @@ function App() {
 
   return (
     <div className="App">
-      <Typography mb="20px">Expense Tracker</Typography>
-      <Box>
+      <Typography variant="h4" mb="20px">
+        Expense Tracker
+      </Typography>
+      <StyledBox>
         <Balance transactions={transactions} />
         <ExpenseSheet transactions={transactions} />
         <Transactions
@@ -34,7 +46,7 @@ function App() {
           deleteTransactions={deleteTransactions}
         />
         <NewTransaction addTransactions={addTransactions} />
-      </Box>
+      </StyledBox>
     </div>
   );
 }
